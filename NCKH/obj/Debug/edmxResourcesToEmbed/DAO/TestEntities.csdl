@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblPoint">
+    <Key>
+      <PropertyRef Name="PointId" />
+    </Key>
+    <Property Name="PointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PointX" Type="Single" />
+    <Property Name="PointY" Type="Single" />
+    <NavigationProperty Name="tblDetails" Relationship="TestModel.FK__tblDetail__Point__1273C1CD" FromRole="tblPoint" ToRole="tblDetail" />
+  </EntityType>
+  <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblPoints" EntityType="Self.tblPoint" />
+    <EntitySet Name="tblDetails" EntityType="TestModel.tblDetail" />
+    <AssociationSet Name="FK__tblDetail__Point__1273C1CD" Association="TestModel.FK__tblDetail__Point__1273C1CD">
+      <End Role="tblPoint" EntitySet="tblPoints" />
+      <End Role="tblDetail" EntitySet="tblDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PointId" Type="Int32" />
+    <Property Name="DateReceived" Type="DateTime" Precision="3" />
+    <Property Name="Strain" Type="Single" />
+    <Property Name="Temperature" Type="Single" />
+    <Property Name="Stress" Type="Single" />
+    <NavigationProperty Name="tblPoint" Relationship="TestModel.FK__tblDetail__Point__1273C1CD" FromRole="tblDetail" ToRole="tblPoint" />
+  </EntityType>
+  <Association Name="FK__tblDetail__Point__1273C1CD">
+    <End Type="TestModel.tblPoint" Role="tblPoint" Multiplicity="0..1" />
+    <End Type="TestModel.tblDetail" Role="tblDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPoint">
+        <PropertyRef Name="PointId" />
+      </Principal>
+      <Dependent Role="tblDetail">
+        <PropertyRef Name="PointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

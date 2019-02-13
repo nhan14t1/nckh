@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PointId" Type="int" />
+          <Property Name="DateReceived" Type="datetime" />
+          <Property Name="Strain" Type="real" />
+          <Property Name="Temperature" Type="real" />
+          <Property Name="Stress" Type="real" />
+        </EntityType>
+        <EntityType Name="tblPoints">
+          <Key>
+            <PropertyRef Name="PointId" />
+          </Key>
+          <Property Name="PointId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PointX" Type="real" />
+          <Property Name="PointY" Type="real" />
+        </EntityType>
+        <Association Name="FK__tblDetail__Point__1273C1CD">
+          <End Role="tblPoints" Type="Self.tblPoints" Multiplicity="0..1" />
+          <End Role="tblDetails" Type="Self.tblDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPoints">
+              <PropertyRef Name="PointId" />
+            </Principal>
+            <Dependent Role="tblDetails">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestModelStoreContainer">
+          <EntitySet Name="tblDetails" EntityType="Self.tblDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPoints" EntityType="Self.tblPoints" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblDetail__Point__1273C1CD" Association="Self.FK__tblDetail__Point__1273C1CD">
+            <End Role="tblPoints" EntitySet="tblPoints" />
+            <End Role="tblDetails" EntitySet="tblDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblPoint">
+          <Key>
+            <PropertyRef Name="PointId" />
+          </Key>
+          <Property Name="PointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PointX" Type="Single" />
+          <Property Name="PointY" Type="Single" />
+          <NavigationProperty Name="tblDetails" Relationship="TestModel.FK__tblDetail__Point__1273C1CD" FromRole="tblPoint" ToRole="tblDetail" />
+        </EntityType>
+        <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblPoints" EntityType="Self.tblPoint" />
+          <EntitySet Name="tblDetails" EntityType="TestModel.tblDetail" />
+          <AssociationSet Name="FK__tblDetail__Point__1273C1CD" Association="TestModel.FK__tblDetail__Point__1273C1CD">
+            <End Role="tblPoint" EntitySet="tblPoints" />
+            <End Role="tblDetail" EntitySet="tblDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PointId" Type="Int32" />
+          <Property Name="DateReceived" Type="DateTime" Precision="3" />
+          <Property Name="Strain" Type="Single" />
+          <Property Name="Temperature" Type="Single" />
+          <Property Name="Stress" Type="Single" />
+          <NavigationProperty Name="tblPoint" Relationship="TestModel.FK__tblDetail__Point__1273C1CD" FromRole="tblDetail" ToRole="tblPoint" />
+        </EntityType>
+        <Association Name="FK__tblDetail__Point__1273C1CD">
+          <End Type="TestModel.tblPoint" Role="tblPoint" Multiplicity="0..1" />
+          <End Type="TestModel.tblDetail" Role="tblDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPoint">
+              <PropertyRef Name="PointId" />
+            </Principal>
+            <Dependent Role="tblDetail">
+              <PropertyRef Name="PointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities">
+          <EntitySetMapping Name="tblPoints">
+            <EntityTypeMapping TypeName="TestModel.tblPoint">
+              <MappingFragment StoreEntitySet="tblPoints">
+                <ScalarProperty Name="PointId" ColumnName="PointId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PointX" ColumnName="PointX" />
+                <ScalarProperty Name="PointY" ColumnName="PointY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDetails">
+            <EntityTypeMapping TypeName="TestModel.tblDetail">
+              <MappingFragment StoreEntitySet="tblDetails">
+                <ScalarProperty Name="Stress" ColumnName="Stress" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="Strain" ColumnName="Strain" />
+                <ScalarProperty Name="DateReceived" ColumnName="DateReceived" />
+                <ScalarProperty Name="PointId" ColumnName="PointId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

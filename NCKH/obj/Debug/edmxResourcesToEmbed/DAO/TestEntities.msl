@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities">
+    <EntitySetMapping Name="tblPoints">
+      <EntityTypeMapping TypeName="TestModel.tblPoint">
+        <MappingFragment StoreEntitySet="tblPoints">
+          <ScalarProperty Name="PointId" ColumnName="PointId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PointX" ColumnName="PointX" />
+          <ScalarProperty Name="PointY" ColumnName="PointY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDetails">
+      <EntityTypeMapping TypeName="TestModel.tblDetail">
+        <MappingFragment StoreEntitySet="tblDetails">
+          <ScalarProperty Name="Stress" ColumnName="Stress" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="Strain" ColumnName="Strain" />
+          <ScalarProperty Name="DateReceived" ColumnName="DateReceived" />
+          <ScalarProperty Name="PointId" ColumnName="PointId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PointId" Type="int" />
+    <Property Name="DateReceived" Type="datetime" />
+    <Property Name="Strain" Type="real" />
+    <Property Name="Temperature" Type="real" />
+    <Property Name="Stress" Type="real" />
+  </EntityType>
+  <EntityType Name="tblPoints">
+    <Key>
+      <PropertyRef Name="PointId" />
+    </Key>
+    <Property Name="PointId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="PointX" Type="real" />
+    <Property Name="PointY" Type="real" />
+  </EntityType>
+  <Association Name="FK__tblDetail__Point__1273C1CD">
+    <End Role="tblPoints" Type="Self.tblPoints" Multiplicity="0..1" />
+    <End Role="tblDetails" Type="Self.tblDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPoints">
+        <PropertyRef Name="PointId" />
+      </Principal>
+      <Dependent Role="tblDetails">
+        <PropertyRef Name="PointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestModelStoreContainer">
+    <EntitySet Name="tblDetails" EntityType="Self.tblDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPoints" EntityType="Self.tblPoints" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblDetail__Point__1273C1CD" Association="Self.FK__tblDetail__Point__1273C1CD">
+      <End Role="tblPoints" EntitySet="tblPoints" />
+      <End Role="tblDetails" EntitySet="tblDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
