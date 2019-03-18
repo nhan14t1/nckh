@@ -103,3 +103,6 @@ D:\Dev\Code_Project\CSharp\NCKH\NCKH\NCKH\obj\Debug\NCKH.csproj.CoreCompileInput
 D:\Dev\Code_Project\CSharp\NCKH\NCKH\NCKH\obj\Debug\NCKH.csproj.CopyComplete
 D:\Dev\Code_Project\CSharp\NCKH\NCKH\NCKH\obj\Debug\NCKH.dll
 D:\Dev\Code_Project\CSharp\NCKH\NCKH\NCKH\obj\Debug\NCKH.pdb
+D:\Dev\Code_Project\CSharp\NCKH\nckh\NCKH\bin\System.Web.Cors.dll
+D:\Dev\Code_Project\CSharp\NCKH\nckh\NCKH\bin\System.Web.Http.Cors.dll
+D:\Dev\Code_Project\CSharp\NCKH\nckh\NCKH\bin\System.Web.Http.Cors.xml
